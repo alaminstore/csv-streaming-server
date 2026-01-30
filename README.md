@@ -58,7 +58,7 @@ npm run start:prod
 
 ## What has been completed and what is pending
 - I have tried to cover all the requirements and also address the bonus points (I Will cover it later).
-- Frontend Issue: Pagination count issue durint SSE (Since submission time is over, I'll solve it later)
+- Frontend Issue: Pagination count issue during SSE (Since submission time is over, I'll solve it later)
 
 ## Frontend
 - [csv-streaming-client](https://github.com/alaminstore/csv-streaming-client/tree/main)
