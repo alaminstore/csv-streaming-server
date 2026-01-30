@@ -322,6 +322,7 @@ export class ImportProcessor extends WorkerHost {
       progress,
       startedAt,
       estimatedCompletion: eta,
+      totalPages: await this.getTotalPages(),
       recentRows: recentRows.slice(0, 10),
     });
 
@@ -366,10 +367,16 @@ export class ImportProcessor extends WorkerHost {
         email: row.email,
         company: row.company,
       })),
+      totalPages: await this.getTotalPages(),
     });
 
     this.logger.log(
       `CSV import completed. Processed: ${processedRows}, Failed: ${failedRows}`,
     );
+  }
+
+  private async getTotalPages(limit: number = 50) {
+    const total = await this.prisma.customer.count();
+    return Math.ceil(total / limit);
   }
 }
