@@ -25,8 +25,12 @@ npx prisma db push
 # Create .env file
 
 cp .env.example .env
+#### Note: 
+- Please create a folder named "data" and put the csv file inside it.
+- Must need to run redis and mongodb before running the server.
 
 ```
+Example:
 DATABASE_URL="mongodb://localhost:27017/csv_streaming?replicaSet=rs0"
 REDIS_HOST="localhost"
 REDIS_PORT=6379
