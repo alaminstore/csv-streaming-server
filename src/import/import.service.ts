@@ -13,6 +13,7 @@ export interface ProgressEvent {
   progress: number;
   startedAt: Date | null;
   estimatedCompletion: Date | null;
+  totalPages: number;
   recentRows: any[];
 }
 
