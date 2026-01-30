@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url = env("DATABASE_URL")
+}
+
+model Customer {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  customerId       String   @unique @map("customer_id")
+  firstName        String   @map("first_name")
+  lastName         String   @map("last_name")
+  company          String
+  city             String
+  country          String
+  phone1           String   @map("phone_1")
+  phone2           String   @map("phone_2")
+  email            String
+  subscriptionDate DateTime @map("subscription_date")
+  website          String
+  about            String   @default("")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("customers")
+}
+
+model ImportJob {
+  id                   String    @id @default(auto()) @map("_id") @db.ObjectId
+  status               String
+  totalRows            Int       @default(2000000) @map("total_rows")
+  processedRows        Int       @default(0) @map("processed_rows")
+  failedRows           Int       @default(0) @map("failed_rows")
+  progress             Float     @default(0) 
+  startedAt            DateTime? @map("started_at")
+  completedAt          DateTime? @map("completed_at")
+  estimatedCompletion  DateTime? @map("estimated_completion")
+  errorMessage         String?   @map("error_message")
+  recentRows           Json[]    @default([]) @map("recent_rows")
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @updatedAt @map("updated_at")
+
+  @@map("import_jobs")
+}
+
+// Note: 
+// - status can be: pending, in_progress, completed, failed
+// - progress: percentage 0-100
+// - totalRows: total number of rows to import (default 2 million for testing purposes) 
