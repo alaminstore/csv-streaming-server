@@ -27,7 +27,7 @@ npx prisma db push
 cp .env.example .env
 
 ```
-DATABASE_URL="mongodb://localhost:27017/csv-streaming"
+DATABASE_URL="mongodb://localhost:27017/csv_streaming?replicaSet=rs0"
 REDIS_HOST="localhost"
 REDIS_PORT=6379
 CSV_FILE_PATH="./data/customers.csv"
@@ -53,4 +53,4 @@ npm run start:prod
 - Customer CRUD API
 
 ## Frontend
-- [React Frontend](https://github.com/alaminstore/csv-streaming-client/tree/main)
+- [csv-streaming-client](https://github.com/alaminstore/csv-streaming-client/tree/main)
