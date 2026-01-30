@@ -52,5 +52,9 @@ npm run start:prod
 - Resume support after restart
 - Customer CRUD API
 
+## What has been completed and what is pending
+- I have tried to cover all the requirements and also address the bonus points (I Will cover it later).
+- Frontend Issue: Pagination not updated without refresh (I'll solve it later)
+
 ## Frontend
 - [csv-streaming-client](https://github.com/alaminstore/csv-streaming-client/tree/main)
