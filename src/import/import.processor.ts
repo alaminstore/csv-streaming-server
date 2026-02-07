@@ -6,7 +6,6 @@ import { ImportService } from './import.service';
 import * as fs from 'fs';
 import csvParser from 'csv-parser';
 import { CsvCustomerRowDto } from './dto/csv-customer-row.dto';
-import { ImportRecentCustomerDto } from './dto/import-recent-customer.dto';
 
 @Processor('csv-import')
 @Injectable()
@@ -15,6 +14,10 @@ export class ImportProcessor extends WorkerHost {
 
   private readonly batchSize: number = parseInt(
     process.env.CSV_BATCH_SIZE || '1000',
+    10,
+  );
+  private readonly totalPerPage: number = parseInt(
+    process.env.TOTAL_PER_PAGE ?? '50',
     10,
   );
 
@@ -322,7 +325,7 @@ export class ImportProcessor extends WorkerHost {
       progress,
       startedAt,
       estimatedCompletion: eta,
-      totalPages: await this.getTotalPages(),
+      totalPages: await this.getTotalPages(this.totalPerPage),
       recentRows: recentRows.slice(0, 10),
     });
 
@@ -367,7 +370,7 @@ export class ImportProcessor extends WorkerHost {
         email: row.email,
         company: row.company,
       })),
-      totalPages: await this.getTotalPages(),
+      totalPages: await this.getTotalPages(this.totalPerPage),
     });
 
     this.logger.log(
